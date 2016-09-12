@@ -13,7 +13,7 @@
     "examples:serve": "rimraf .dist-test/; mkdir .dist-test/; rimraf dist/; mkdir dist/; npm run examples:build && http-server -p 4200 .dist-test/",
     "build": "rimraf dist/; mkdir dist/; concurrently 'npm run umd-shopify-buy:build' 'npm run umd-shopify-buy-polyfilled:build' && concurrently 'npm run umd-shopify-buy:minify' 'npm run umd-shopify-buy-polyfilled:minify'",
     "doc:build": "./scripts/yuidoc",
-    "doc:serve": "jekyll serve -s docs",
+    "doc:serve": "which bundler && scripts/doc-serve || echo 'To run the doc server, we need ruby and bundler installed. For more info checkout https://github.com/Shopify/js-buy-sdk/blob/master/CONTRIBUTING.md'",
     "------ Scripts used to build JS for distribution": null,
     "umd-shopify-buy:build": "rollup -f cjs src/shopify.js | node scripts/runBabel umd > dist/shopify-buy.umd.js",
     "umd-shopify-buy:minify": "uglifyjs --compress --mangle -o dist/shopify-buy.umd.min.js -- dist/shopify-buy.umd.js",
